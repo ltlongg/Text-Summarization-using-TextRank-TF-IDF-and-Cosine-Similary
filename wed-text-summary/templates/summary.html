@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tóm tắt</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .summary {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.6; 
+            font-size: 18px; 
+        }
+        .summary p {
+            margin: 0; 
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #5cb85c; 
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease; 
+        }
+        a:hover {
+            background-color: #4cae4c; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Tóm tắt văn bản</h1>
+    <div class="summary">
+        <p>{{ summary }}</p>
+    </div>
+    <a href="{{ url_for('home') }}">Quay lại</a>
+</body>
+</html>

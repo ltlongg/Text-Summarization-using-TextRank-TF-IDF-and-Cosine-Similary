@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tóm tắt văn bản</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .input-container {
+            margin-bottom: 15px;
+        }
+        .input-container.hidden {
+            display: none;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tóm tắt văn bản</h1>
+    
+    {% if error %}
+    <div class="error-message">{{ error }}</div>
+    {% endif %}
+    
+    <form method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
+        <label for="summarization_method">Chọn phương pháp tóm tắt:</label>
+        <select name="summarization_method" id="summarization_method">
+            <option value="textrank">TextRank</option>
+            <option value="other">TF-IDF</option>
+        </select>
+
+        <label for="num_sentences">Số câu tóm tắt:</label>
+        <input type="number" name="num_sentences" id="num_sentences" min="1" value="5">
+
+        <h3>Nhập đầu vào:</h3>
+        <div>
+            <label><input type="radio" name="input_type" value="url" onclick="showInputField('url')" checked> URL</label>
+            <label><input type="radio" name="input_type" value="file" onclick="showInputField('file')"> File</label>
+            <label><input type="radio" name="input_type" value="text" onclick="showInputField('text')"> Văn bản</label>
+        </div>
+
+        <div id="url_input" class="input-container">
+            <label for="url">Nhập URL:</label>
+            <input type="text" name="url" id="url" placeholder="Nhập URL tại đây...">
+        </div>
+
+        <div id="file_input" class="input-container hidden">
+            <label for="file">Chọn file:</label>
+            <input type="file" name="file" id="file">
+            
+            <!-- Fields for page range input for PDF files -->
+            <label for="start_page">Trang bắt đầu:</label>
+            <input type="number" name="start_page" id="start_page" min="1" placeholder="Trang bắt đầu">
+            
+            <label for="end_page">Trang kết thúc:</label>
+            <input type="number" name="end_page" id="end_page" min="1" placeholder="Trang kết thúc">
+        </div>
+
+        <div id="text_input" class="input-container hidden">
+            <label for="text">Nhập văn bản:</label>
+            <textarea name="text" id="text" rows="5" placeholder="Nhập văn bản tại đây..."></textarea>
+        </div>
+
+        <button type="submit">Tóm tắt</button>
+    </form>
+
+    <script>
+        function showInputField(type) {
+            document.getElementById('url_input').classList.add('hidden');
+            document.getElementById('file_input').classList.add('hidden');
+            document.getElementById('text_input').classList.add('hidden');
+
+            if (type === 'url') {
+                document.getElementById('url_input').classList.remove('hidden');
+            } else if (type === 'file') {
+                document.getElementById('file_input').classList.remove('hidden');
+            } else if (type === 'text') {
+                document.getElementById('text_input').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
