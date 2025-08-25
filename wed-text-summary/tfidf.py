@@ -9,7 +9,7 @@ from nltk.stem import WordNetLemmatizer
 from bs4 import BeautifulSoup
 from PyPDF2 import PdfReader
 
-nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')

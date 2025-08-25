@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, session, url_for
 import os
-from summarizer import url, pdf, txt, summarize_text
-from test import (
+from tfidf import url, pdf, txt, summarize_text
+from textrank import (
     coisne_similarity,
     extract,
     idf,
